@@ -1,0 +1,12 @@
+// Configurazione del Worker Cloudflare che pubblica il sito.
+// "name" deve essere IDENTICO al nome del Worker creato su Cloudflare:
+// il sito sarà su https://sbl-company.yuvraj-chander.workers.dev
+{
+  "name": "sbl-company",
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

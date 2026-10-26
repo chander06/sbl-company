@@ -1,0 +1,4 @@
+Contact: mailto:info.asblcompany@gmail.com
+Expires: 2027-10-26T00:00:00.000Z
+Preferred-Languages: it, en
+Canonical: https://thesblcompany.com/.well-known/security.txt
