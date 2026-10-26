@@ -136,7 +136,7 @@ sup { font-size: .5em; vertical-align: super; line-height: 0; }
   border: 1px solid rgb(255 255 255 / .12);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / .16), inset 0 -1px 0 rgb(255 255 255 / .04), 0 18px 40px -18px rgb(0 0 0 / .55);
   -webkit-backdrop-filter: blur(22px) saturate(180%); backdrop-filter: blur(22px) saturate(180%);
-  transition: padding .6s var(--ease), border-radius .6s var(--ease), box-shadow .6s var(--ease), background-color .4s;
+  transition: padding .6s var(--ease), border-radius .6s var(--ease), box-shadow .6s var(--ease), background-color .4s, opacity .5s var(--ease), transform .7s var(--ease);
 }
 .island::before { /* riflesso che segue il mouse */
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -145,8 +145,12 @@ sup { font-size: .5em; vertical-align: super; line-height: 0; }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .island { background: rgb(16 16 18 / .96); } }
 
-.island__brand { display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: -.01em; min-height: 40px; padding-right: 8px; }
-.island__star { width: 12px; height: 34px; fill: currentColor; margin-top: -2px; }
+.island__brand { display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: -.01em; min-width: 40px; min-height: 40px; padding: 0 4px; }
+.island__star { flex-shrink: 0; width: 11px; height: 36px; fill: currentColor; }
+.island__name {
+  display: inline-block; overflow: hidden; white-space: nowrap; max-width: 60px; margin-left: 8px;
+  transition: max-width .6s var(--ease), margin .6s var(--ease), opacity .4s var(--ease);
+}
 .island__links { display: flex; align-items: center; }
 .island__links a {
   display: flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px;
@@ -167,13 +171,17 @@ sup { font-size: .5em; vertical-align: super; line-height: 0; }
 @media (min-width: 900px) {
   .island__links { overflow: hidden; max-width: 560px; transition: max-width .7s var(--ease), opacity .45s var(--ease); }
   .island.is-compact .island__links { max-width: 0; opacity: 0; }
-  .island.is-compact { padding-left: 16px; }
+  .island.is-compact { padding-left: 6px; }
+  .island.is-compact .island__name { max-width: 0; margin-left: 0; opacity: 0; }
+  .island:not(.is-compact) { padding-left: 12px; }
   .island.is-compact:hover .island__links, .island.is-compact:focus-within .island__links { max-width: 560px; opacity: 1; }
 }
 
 /* Mobile: isola compatta che si espande in pannello */
 @media (max-width: 899px) {
-  .island { width: auto; padding: 6px 6px 6px 16px; flex-wrap: wrap; border-radius: 28px; }
+  .island { width: auto; padding: 6px; flex-wrap: wrap; border-radius: 28px; }
+  .island__name { display: none; }
+  .island__brand { width: 44px; padding: 0; }
   .island__links { display: none; }
   .island__cta { display: none; }
   .island__toggle {
@@ -185,8 +193,9 @@ sup { font-size: .5em; vertical-align: super; line-height: 0; }
   .island__toggle span { display: block; width: 16px; height: 1.5px; border-radius: 2px; background: currentColor; transition: transform .45s var(--ease); }
   .island__toggle[aria-expanded="true"] span:first-child { transform: translateY(3.75px) rotate(45deg); }
   .island__toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+  .island.is-open .island__brand { justify-content: flex-start; padding-left: 8px; }
   .island.is-open {
-    width: min(100%, 520px); padding: 10px 10px 14px 18px; border-radius: 30px;
+    width: min(100%, 520px); padding: 10px 10px 14px 10px; border-radius: 30px;
     background: rgb(16 16 18 / .9);
   }
   .island.is-open .island__brand { flex: 1; }
@@ -203,6 +212,35 @@ sup { font-size: .5em; vertical-align: super; line-height: 0; }
   @keyframes menuIn { from { opacity: 0; transform: translateY(-8px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 }
 body.menu-open { overflow: hidden; }
+
+/* ---------- Apertura: la stella si accende, poi il nero si chiude nell'isola ---------- */
+.intro { display: none; }
+.intro-pending .intro {
+  display: block; position: fixed; inset: 0; z-index: 200; background: #000;
+  clip-path: inset(0 0 0 0 round 0);
+  transition: clip-path .95s var(--ease-io), opacity .45s var(--ease);
+  animation: introFailsafe .01s 5s forwards; /* se il JS non parte, l'apertura sparisce comunque */
+}
+.intro__star {
+  position: absolute; left: 50%; top: 50%; width: 24px; height: 78px; fill: #fff;
+  transform: translate(-50%, -50%) scale(.5); opacity: 0; filter: blur(8px);
+  animation: introStar 1s var(--ease) .15s forwards;
+  transition: opacity .4s var(--ease), transform .9s var(--ease-io), filter .4s;
+}
+@keyframes introStar {
+  60% { opacity: 1; filter: blur(0) drop-shadow(0 0 22px rgb(255 255 255 / .9)); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0) drop-shadow(0 0 14px rgb(255 255 255 / .55)); }
+}
+@keyframes introFailsafe { to { visibility: hidden; } }
+.intro.is-closing { clip-path: inset(var(--t, 12px) var(--r, 40%) var(--b, 90%) var(--l, 40%) round var(--rad, 26px)); }
+.intro.is-closing .intro__star {
+  animation: none; opacity: 1; filter: drop-shadow(0 0 8px rgb(255 255 255 / .6));
+  transform: translate(-50%, -50%) translate(var(--sx, 0px), var(--sy, -40vh)) scale(.46);
+}
+.intro.is-done .intro__star { opacity: 0; }
+.intro.is-done { opacity: 0; }
+.intro-pending { overflow: hidden; }
+.intro-pending .island { opacity: 0; transform: scale(.9); }
 
 /* ---------- Hero ---------- */
 .hero {

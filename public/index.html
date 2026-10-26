@@ -25,9 +25,10 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=1">
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
   <link rel="stylesheet" href="/assets/css/cookie-consent.css?v=1">
-  <script src="/assets/js/main.js?v=1" defer></script>
+  <script src="/assets/js/intro.js?v=2"></script>
+  <script src="/assets/js/main.js?v=2" defer></script>
   <script src="/assets/js/cookie-consent.js?v=1" defer></script>
   <script type="application/ld+json">
   {
@@ -78,7 +79,12 @@
       <path d="M547.763 442.612L526.437 841.454L505.112 442.612C503.406 414.746 486.346 391.233 460.755 381.654L436.871 372.946L467.579 361.625C489.758 353.787 505.965 334.629 511.083 311.117L526.437 231L542.644 311.117C546.909 334.629 563.97 353.787 586.148 361.625L616.856 372.946L592.972 381.654C566.528 391.233 549.469 414.746 547.763 442.612Z"/>
       <path d="M630.824 257.428C623.744 257.428 617.875 251.408 617.875 244.29C617.875 237.02 623.592 231 630.824 231C638.056 231 644 236.755 644 244.138C644 251.521 638.169 257.428 630.824 257.428ZM630.824 256.065C637.336 256.065 642.637 250.916 642.637 244.29C642.637 237.702 637.488 232.363 630.937 232.363C624.387 232.363 619.238 237.702 619.238 244.29C619.238 250.688 624.425 256.065 630.824 256.065ZM629.007 243.722V250.537H631.43V251.067H623.403V250.537H625.864V237.361H623.403V236.831H631.657C634.345 236.831 637.563 237.058 637.563 240.049C637.563 242.472 634.61 243.305 632.338 243.532V243.608C636.162 244.1 637.033 245.88 637.033 249.363C637.033 250.12 637.109 250.953 639.457 250.575V251.067C638.775 251.256 638.093 251.37 637.374 251.37C634.875 251.37 633.588 250.272 633.588 248.076C633.588 244.63 633.02 243.722 629.007 243.722ZM629.007 237.361V243.078C631.846 243.002 634.156 243.419 634.156 240.238C634.156 236.755 632.225 237.399 629.007 237.361Z"/>
     </symbol>
+    <symbol id="mark" viewBox="432 226 190 620">
+      <path d="M547.763 442.612L526.437 841.454L505.112 442.612C503.406 414.746 486.346 391.233 460.755 381.654L436.871 372.946L467.579 361.625C489.758 353.787 505.965 334.629 511.083 311.117L526.437 231L542.644 311.117C546.909 334.629 563.97 353.787 586.148 361.625L616.856 372.946L592.972 381.654C566.528 391.233 549.469 414.746 547.763 442.612Z"/>
+    </symbol>
   </svg>
+
+  <div class="intro" aria-hidden="true"><svg class="intro__star"><use href="#mark"/></svg></div>
 
   <a class="skip" href="#main">Vai al contenuto</a>
 
@@ -86,8 +92,8 @@
   <header class="island-wrap">
     <nav class="island" aria-label="Navigazione principale" data-island>
       <a class="island__brand" href="/#top" aria-label="SBL Company, torna all'inizio">
-        <svg class="island__star" aria-hidden="true"><use href="#star"/></svg>
-        <span>SBL<sup>™</sup></span>
+        <svg class="island__star" aria-hidden="true"><use href="#mark"/></svg>
+        <span class="island__name">SBL<sup>™</sup></span>
       </a>
       <ul class="island__links" id="menu">
         <li><a href="/#chi-siamo">Chi siamo</a></li>

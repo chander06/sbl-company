@@ -43,9 +43,45 @@ document.documentElement.classList.add('js');
   var blurTitle = doc.querySelector('[data-blur-title]');
   if (blurTitle) splitWords(blurTitle, 0);
 
-  function loaded() { requestAnimationFrame(function () { root.classList.add('is-loaded'); }); }
+  var introRunning = root.classList.contains('intro-pending');
+  function loaded() {
+    if (introRunning) return; // il titolo parte quando l'apertura finisce
+    requestAnimationFrame(function () { root.classList.add('is-loaded'); });
+  }
   if (doc.readyState === 'complete') loaded(); else window.addEventListener('load', loaded);
   setTimeout(loaded, 2500); // se qualche risorsa tarda, il titolo compare comunque
+
+  /* ---------- Apertura: stella → il nero si chiude nell'isola ---------- */
+  (function runIntro() {
+    var intro = doc.querySelector('.intro');
+    var isl = doc.querySelector('[data-island]');
+    function finish() {
+      root.classList.remove('intro-pending');
+      introRunning = false;
+      loaded();
+      if (intro) setTimeout(function () { intro.remove(); }, 600);
+    }
+    if (!introRunning) { if (intro) intro.remove(); return; }
+    if (!intro || !isl) { finish(); return; }
+    setTimeout(function () {
+      var r = isl.getBoundingClientRect();
+      var vw = window.innerWidth, vh = window.innerHeight;
+      intro.style.setProperty('--t', r.top + 'px');
+      intro.style.setProperty('--r', Math.max(0, vw - r.right) + 'px');
+      intro.style.setProperty('--b', Math.max(0, vh - r.bottom) + 'px');
+      intro.style.setProperty('--l', r.left + 'px');
+      var st = isl.querySelector('.island__star');
+      var sr = st ? st.getBoundingClientRect() : r;
+      intro.style.setProperty('--sx', (sr.left + sr.width / 2 - vw / 2) + 'px');
+      intro.style.setProperty('--sy', (sr.top + sr.height / 2 - vh / 2) + 'px');
+      intro.style.setProperty('--rad', (r.height / 2) + 'px');
+      intro.classList.add('is-closing');
+      setTimeout(function () {
+        intro.classList.add('is-done');
+        finish();
+      }, 800);
+    }, 1150);
+  })();
 
   /* ---------- Reveal allo scroll ---------- */
   var revealEls = doc.querySelectorAll('[data-reveal]');
