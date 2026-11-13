@@ -209,7 +209,9 @@ document.documentElement.classList.add('js');
       var vh = window.innerHeight;
       var pastHero = hero.getBoundingClientRect().bottom < vh * 0.4;
       var nearEnd = (contact && contact.getBoundingClientRect().top < vh * 0.9) || (footer && footer.getBoundingClientRect().top < vh);
-      fab.classList.toggle('is-shown', pastHero && !nearEnd);
+      var inWork = false;
+      if (items.length) { var wr = scroller.getBoundingClientRect(); inWork = wr.top < vh * 0.5 && wr.bottom > vh * 0.5; }
+      fab.classList.toggle('is-shown', pastHero && !nearEnd && !inWork);
     }
     ticking = false;
   }

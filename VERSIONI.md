@@ -3,6 +3,9 @@
 Concept: monocromatico bianco/nero + vetro liquido; navigazione a "isola" stile Dynamic Island che si espande; titolo hero da sfocato a nitido; frase che si accende parola per parola; iPhone sticky che cambia schermata del portfolio allo scroll; barre SBL vs mercato.
 Indirizzo: https://sbl-company.yuvraj-chander.workers.dev (poi thesblcompany.com)
 
+## Nuovo progetto in portfolio (v0.3-bozza) — 2026-11-13
+- Aggiunto Bar degli Specchi (bardeglispecchi.it) come quinto progetto: schermata della home, descrizione e link
+
 ## Aggiornamento portfolio (v0.2-bozza) — 2026-11-12
 - Nuova schermata di Le Streghe Ubriache dal sito aggiornato (home, senza il popup dell'evento); file rinominato lavoro-streghe-2 per evitare la vecchia versione in cache
 
