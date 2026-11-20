@@ -3,6 +3,9 @@
 Concept: monocromatico bianco/nero + vetro liquido; navigazione a "isola" stile Dynamic Island che si espande; titolo hero da sfocato a nitido; frase che si accende parola per parola; iPhone sticky che cambia schermata del portfolio allo scroll; barre SBL vs mercato.
 Indirizzo: https://sbl-company.yuvraj-chander.workers.dev (poi thesblcompany.com)
 
+## V1.1 — llms.txt (v1.1) — 2026-11-20
+- Aggiunto public/llms.txt (chi è SBL, pacchetti e prezzi, servizi opzionali, processo, progetti, contatti) per gli assistenti AI; servito come testo UTF-8
+
 ## V1 — sito indicizzabile e SEO (v1) — 2026-11-20
 - Il dominio thesblcompany.com punta già al nuovo sito: tolti i blocchi della bozza (meta noindex, X-Robots-Tag, robots.txt Disallow); la 404 resta noindex
 - Title e meta description orientati a "realizzazione siti web per PMI"; H1 con le parole chiave (stesso aspetto, il titolone resta invariato)
