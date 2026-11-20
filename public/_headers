@@ -18,8 +18,8 @@
   Cross-Origin-Opener-Policy: same-origin
 
 # ---- SOLO BOZZA: togli il "#" dalle due righe qui sotto. In V1 rimettilo. ----
-/*
-  X-Robots-Tag: noindex
+# /*
+#   X-Robots-Tag: noindex
 
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
